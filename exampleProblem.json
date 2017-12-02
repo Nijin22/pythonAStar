@@ -6,9 +6,9 @@
     {"id":"D", "X":1, "Y": 1}
   ],
   "edges": [
-    {"start":"A", "end":"B"},
-    {"start":"B", "end":"C"},
-    {"start":"C", "end":"D"}
+    {"start":"A", "end":"B", "cost": 1},
+    {"start":"B", "end":"C", "cost": 1},
+    {"start":"C", "end":"D", "cost": 1}
   ],
   "startNode":"A",
   "targetNode":"D"

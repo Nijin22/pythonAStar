@@ -19,7 +19,7 @@ with open(inputfile) as f:
     for node in problem['nodes']:
         graph.add_node(node['id'], x=node['X'], y=node['Y'])
     for edge in problem['edges']:
-        graph.add_edge(edge['start'], edge['end'])
+        graph.add_edge(edge['start'], edge['end'], cost=edge['cost'])
     startNode = problem['startNode']
     targetNode = problem['targetNode']
     f.close()

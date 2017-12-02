@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    {"id":"A", "X":0, "Y": 0},
+    {"id":"B", "X":1, "Y": 0},
+    {"id":"C", "X":0, "Y": 1},
+    {"id":"D", "X":1, "Y": 1}
+  ],
+  "edges": [
+    {"start":"A", "end":"B"},
+    {"start":"B", "end":"C"},
+    {"start":"C", "end":"D"}
+  ],
+  "startNode":"A",
+  "targetNode":"D"
+}

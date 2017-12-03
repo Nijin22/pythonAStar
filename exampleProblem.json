@@ -3,13 +3,17 @@
     {"id":"A", "X":0, "Y": 0},
     {"id":"B", "X":1, "Y": 0},
     {"id":"C", "X":0, "Y": 1},
-    {"id":"D", "X":1, "Y": 1}
+    {"id":"D", "X":1, "Y": 1},
+    {"id":"E", "X":2, "Y": 1}
   ],
   "edges": [
     {"start":"A", "end":"B", "cost": 1},
+    {"start":"A", "end":"C", "cost": 1},
     {"start":"B", "end":"C", "cost": 1},
-    {"start":"C", "end":"D", "cost": 1}
+    {"start":"B", "end":"D", "cost": 9991},
+    {"start":"C", "end":"D", "cost": 1},
+    {"start":"D", "end":"E", "cost": 1}
   ],
   "startNode":"A",
-  "targetNode":"D"
+  "targetNode":"E"
 }

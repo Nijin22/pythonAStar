@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{todonotes}
+\usepackage{graphicx}
+\usepackage[]{acronym}
+\usepackage{float}
+\usepackage[parfill]{parskip}
+\usepackage{csquotes}
+\usepackage{pgffor} % Loops
+% \usepackage[section]{placeins} % ensure that figures appear in the section they're associated with
+\usepackage{mathtools}
+\usepackage[backend=biber]{biblatex}
+\usepackage[american]{babel}
+\usepackage{hyperref}
+
+\addbibresource{bib.bib}
+\lstset{ 
+	language=Python, % choose the language of the code
+	basicstyle=\fontfamily{pcr}\selectfont\scriptsize,
+	keywordstyle=\color{black}\bfseries, % style for keywords    
+	frame=single, % adds a frame around the code
+	tabsize=2, % sets default tabsize to 2 spaces
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{gray},
+	morecomment=[l][\color{magenta}]{\#}
+	captionpos=b, % sets the caption-position to bottom
+	breaklines=true, % sets automatic line breaking
+	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+	breakatwhitespace=false,
+}
+
+\begin{document}
+	
+\title{Computer Algorithms -- Project report: Pathfinding with A*}
+\author{Saleh Shehata \& Dennis Weber}
+\maketitle
+
+\begin{abstract}
+	\todo[inline]{ABSTRACT HERE}
+\end{abstract}
+
+\section*{Abbreviations}
+\begin{acronym}[SIFT]
+	\setlength{\parskip}{0ex}
+	\setlength{\itemsep}{1ex}
+	\acro{DoG}{Difference of Gaussian}
+	\acro{SIFT}{Scale Invariant Feature Transform}	
+\end{acronym}
+
+\section{Introduction}
+\todo[inline]{TODO}
+
+\section{Description of A*}
+\todo[inline]{Dennis will do this part}
+
+\section{Alternative Heuristics}
+\todo[inline]{Saleh will do this part}
+
+
+\printbibliography
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newgeometry{left=1cm, right=1cm, bottom=3cm, top=1cm, onecolumn}
+%\section{Appendix}
+
+
+
+
+\end{document}

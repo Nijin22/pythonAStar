@@ -92,4 +92,3 @@ while len(toCheckNodes) > 0: # As long as there are nodes which could lead to th
 # No more possible nodes to lead to the target!
 # I.e. there is no way to reach the target.
 print('There is no route to the target.')
-# TODO

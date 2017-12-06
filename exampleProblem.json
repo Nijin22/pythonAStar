@@ -2,17 +2,25 @@
   "nodes": [
     {"id":"A", "X":0, "Y": 0},
     {"id":"B", "X":1, "Y": 0},
-    {"id":"C", "X":0, "Y": 1},
-    {"id":"D", "X":1, "Y": 1},
-    {"id":"E", "X":2, "Y": 1}
+    {"id":"C", "X":2, "Y": 0},
+    {"id":"D", "X":0, "Y": 1},
+    {"id":"E", "X":1, "Y": 1},
+    {"id":"F", "X":2, "Y": 1},
+    {"id":"G", "X":0, "Y": 3},
+    {"id":"H", "X":1, "Y": 3},
+    {"id":"I", "X":2, "Y": 3}
   ],
   "edges": [
     {"start":"A", "end":"B", "cost": 1},
-    {"start":"A", "end":"C", "cost": 1},
     {"start":"B", "end":"C", "cost": 1},
-    {"start":"B", "end":"D", "cost": 9991},
-    {"start":"C", "end":"D", "cost": 1},
-    {"start":"D", "end":"E", "cost": 1}
+    {"start":"C", "end":"F", "cost": 1},
+    {"start":"F", "end":"E", "cost": 1},
+    {"start":"F", "end":"I", "cost": 1},
+    {"start":"A", "end":"D", "cost": 1},
+    {"start":"D", "end":"G", "cost": 1},
+    {"start":"G", "end":"H", "cost": 1},
+    {"start":"H", "end":"E", "cost": 1},
+    {"start":"H", "end":"I", "cost": 1}
   ],
   "startNode":"A",
   "targetNode":"E"

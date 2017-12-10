@@ -22,6 +22,46 @@ def calcHeuristic(fromNode, toNode):
     diffTotal = math.sqrt(diffX**2 + diffY**2)
     return diffTotal
 
+def findBestNode(toCheckNodes):
+    bestNode = ''
+    bestNodeScore = float("inf")
+    for toCheckNode in toCheckNodes:
+        score = graph.nodes[toCheckNode]['costToReach'] + graph.nodes[toCheckNode]['heuristic']
+        if score < bestNodeScore:
+            bestNode = toCheckNode
+            bestNodeScore = score
+    return bestNode
+
+def handlePathFound(targetNode):
+    # We arrived at the target node!
+    print('=============')
+    print('Found path!')
+    currNode = targetNode
+    path = [currNode] # We reconstruct the path backwards by following the predecessors
+    while 'predecessor' in graph.nodes[currNode]:
+        predecessor = graph.nodes[currNode]['predecessor']
+        path.append(predecessor)
+        currNode = predecessor
+    path.reverse()
+    print(path)
+    sys.exit()
+
+def handleNeighbors(neighbors, checkedNodes, toCheckNodes):
+    for neighbor in neighbors:
+        if neighbor in checkedNodes:
+            continue # We already came across this node from a better path. So we're not interested.
+        if neighbor not in toCheckNodes:
+            toCheckNodes.add(neighbor) # We should  check the paths going through here!
+        print('New neighbor: >' + str(neighbor) + '<')
+        costToGetToNeighbor = graph.nodes[bestNode]['costToReach'] + graph.edges[bestNode, neighbor]['cost']
+        if 'costToReach' not in  graph.nodes[neighbor] or costToGetToNeighbor < graph.nodes[neighbor]['costToReach']:
+            print('  With a better path!')
+            graph.nodes[neighbor]['predecessor'] = bestNode
+            graph.nodes[neighbor]['costToReach'] = costToGetToNeighbor
+            graph.nodes[neighbor]['heuristic'] = calcHeuristic(neighbor, targetNode)
+        else:
+            print('  But the current path is already better')
+
 # Step 1: Read input into graph
 if (len(sys.argv) > 1) and (sys.argv[1] != ""):
     inputfile = sys.argv[1]
@@ -49,42 +89,12 @@ print('Starting at >'+ str(startNode) + '<')
 
 while len(toCheckNodes) > 0: # As long as there are nodes which could lead to the target....
     # find the node with the smallest fScore (current cost + heuristic)
-    bestNode = ''
-    bestNodeScore = float("inf")
-    for toCheckNode in toCheckNodes:
-        score = graph.nodes[toCheckNode]['costToReach'] + graph.nodes[toCheckNode]['heuristic']
-        if score < bestNodeScore:
-            bestNode = toCheckNode
-            bestNodeScore = score
+    bestNode = findBestNode(toCheckNodes)
 
     if bestNode == targetNode:
-        # We arrived at the target node!
-        print('=============')
-        print('Found path!')
-        currNode = targetNode
-        path = [currNode] # We reconstruct the path backwards by following the predecessors
-        while 'predecessor' in graph.nodes[currNode]:
-            predecessor = graph.nodes[currNode]['predecessor']
-            path.append(predecessor)
-            currNode = predecessor
-        path.reverse()
-        print(path)
-        sys.exit()
+        handlePathFound(targetNode)
 
-    for neighbor in list(graph.neighbors(bestNode)):
-        if neighbor in checkedNodes:
-            continue # We already came across this node from a better path. So we're not interested.
-        if neighbor not in toCheckNodes:
-            toCheckNodes.add(neighbor) # We should  check the paths going through here!
-        print('New neighbor: >' + str(neighbor) + '<')
-        costToGetToNeighbor = graph.nodes[bestNode]['costToReach'] + graph.edges[bestNode, neighbor]['cost']
-        if 'costToReach' not in  graph.nodes[neighbor] or costToGetToNeighbor < graph.nodes[neighbor]['costToReach']:
-            print('  With a better path!')
-            graph.nodes[neighbor]['predecessor'] = bestNode
-            graph.nodes[neighbor]['costToReach'] = costToGetToNeighbor
-            graph.nodes[neighbor]['heuristic'] = calcHeuristic(neighbor, targetNode)
-        else:
-            print('  But the current path is already better')
+    handleNeighbors(list(graph.neighbors(bestNode)), checkedNodes, toCheckNodes)
 
     toCheckNodes.remove(bestNode) # Node has been checked!
     checkedNodes.add(bestNode) # Node has been checked!

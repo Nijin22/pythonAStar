@@ -44,7 +44,7 @@ with open(inputfile) as f:
 checkedNodes = set()
 toCheckNodes = set(startNode) # Begin with the start node
 graph.nodes[startNode]['costToReach'] = 0 # cost to reach start Node is 0.
-graph.nodes[startNode]['heuristic'] = calcHeuristic(startNode, targetNode) # cost to reach start Node is 0.
+graph.nodes[startNode]['heuristic'] = calcHeuristic(startNode, targetNode)
 print('Starting at >'+ str(startNode) + '<')
 
 while len(toCheckNodes) > 0: # As long as there are nodes which could lead to the target....

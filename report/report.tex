@@ -18,6 +18,7 @@
 \usepackage[backend=biber]{biblatex}
 \usepackage[american]{babel}
 \usepackage{hyperref}
+\usepackage{titlesec}
 
 \addbibresource{bib.bib}
 \lstset{ 
@@ -61,9 +62,48 @@
 \todo[inline]{Dennis will do this part}
 
 \section{Alternative Heuristics}
-\todo[inline]{Saleh will do this part}
+A* algorithm efficiency depends heavily on the heuristics method. It is the reason why A* algorithm is implemented widely in real life. There are many types of heuristics that can be considered in implementing and reasoning A* algorithm. Maybe you have motion restriction in that case you would consider a direction based heuristics method. Or maybe the your problem has probabilities to it so you might consider a heuristics methods that depends on classifiers. Or maybe your problem has blocks and a timed short cuts, a game for example, you might consider your heuristics method depending on those conditions.
+
+First of all what is a heuristic and why bother using it? Any optimization problem of a finite number of alternatives given a ground set \begin{math} S = {1,....,n} and an objective function f : 2^S \rightarrow R, the set feasible solution X \subset 2^S is finite.\end{math} Meaning that heuristics are problem-dependent techniques. As such, they usually are adapted to the problem at hand and they try to take full advantage of the particularities of this problem. However, because they are often too greedy, they usually get trapped in a local optimum and thus fail, in general, to obtain the global optimum solution. There are two types of heuristics methods used in A* algorithm exact heuristics and approximation heuristics.
+
+One thing to always consider is while deciding to use A* algorithm is the complexity of the heuristics computation. One can view A* algorithm as a 'thinking' version of Dijkstra graph search algorithm. While the equation of Dijkstra graph search algorithm can be viewed as:  f(v) = g(v), where g(v) is computing the minimum spanning tree of the current node. On the other hand, A* algorithm's equation can be viewed as: f(v) = g(x) + h(x), where g(x) is just like that of Dijkstra algorithm's, computing the minimum spanning tree of the current node or distance so far, and h(x) is the distance from the current node to the goal node. So if ever h(v) = 0, A* algorithm will act like Dijkstra's algorithm, which is guaranteed to find the shortest path. Similarly if the heuristics function h(v) is always lower than (or equal to) the cost of moving from n to the goal, then A* will be also guaranteed to find the shortest path; however it will explore more nodes than needed, making it run slower.
+
+So if the lower h(v) is the slower A* is; however the slowest it can get, is as slow as Dijkstra algorithm's. If h(n) is exactly equal to the cost of moving from n to the goal, then A* will only follow the best path and never expand anything else, making it very fast. Although you can’t make this happen in all cases, you can make it exact in some special cases. It’s nice to know that given perfect information, A* will behave perfectly. Another great special case could be that your heuristic function h(v) is very high relative to g(v), then only h(v) plays a role, and A* turns to Best First Search, which uses a priority queue based heuristics search. Best First Search, which is also guaranteed to find the shortest path.
+
+So is it always true that the higher the heuristic function is, the faster A* algorithm behaves? Of course yes but it is not always guaranteed to find the shortest path. If h(n) is sometimes greater than the cost of moving from n to the goal, then A* is not guaranteed to find a shortest path, but it can run faster.
+
+\newpage
+\subsection{Exact Heuristics}
+Exact Heuristic function is the perfect heuristic function, one can have. If the heuristic function is exactly equal to the distance along the optimal path, A* will expand very few nodes. A* will compute:  f(n) = g(n) + h(n) at every node. When h(n) exactly matches g(n), the value of f(n) won't change along the path. All nodes not on the right path will have a higher value of f than nodes that are on the right path. Since A* won't consider higher-valued f nodes until it has considered lower-valued f nodes, it will never stray off the shortest path.
+
+\subsubsection{Precomputed Exact Heuristic}
+One way to construct an exact heuristic is to compute the length of the shortest path between every pair of nodes before hand. This is not feasible for most maps. However, there are ways to approximate this heuristic
+
+\subsubsection{Linear Exact Heuristic}
+In Special cases one can really use the Precomputed Exact Heuristic. If there are no obstacles and no conditions on the path direction then then the shortest path from the starting point to the goal should be a straight line. However that is never the case in real life applications.
+
+\subsubsection{Directional Heuristic}
+The heuristic function is often tailored the the problem. There are three famous directional heuristics that are often considered or used to derive from.
+
+\paragraph{Manhattan distance: }
+ The Manhattan distance heuristic is often used when the problem restricts that to movement to be in only four directions north, south, east, and west in a linear manner. The Manhattan distance heuristic function is basically, look at your cost function and find the minimum cost D for moving from one space to an adjacent space. So mathematically it is: \begin{math} h(v) = D*(|(v(x) - g(x))| + |v(y) - g(y)|)\end{math}. D is a scaling factor depending on the problem, v is the current node and v(x), v(y) are the x, and y coordinates of the current node respectively, and g is the target node or goal, g(x), g(y) are the x and y coordinates of the goal node respectively.
+
+\paragraph{Diagonal distance: }
+The Diagonal distance heuristic is often used when the problem restricts that to movement to be in only eight directions north, south, east, west, northeast, southeast, northwest and southwest. The mathematical representation for the Diagonal distance is: \begin{math} h(v) = D*(|(v(x) - g(x))| + |v(y) - g(y)|) + (D2 - 2 * D) * min(|(v(x) - g(x))|, |v(y) - g(y)|)\end{math}. Where D, g, and x are the same as those of the Manhattan distance described above and D2 is diagonal cost. So the function is basically, if you can’t take a diagonal, then subtract the steps you save by using the diagonal. There are \begin{math} min(\delta x, \delta y) \end{math}diagonal steps, and each one costs D2 but saves you 2⨉D non-diagonal steps.
+
+\paragraph{Euclidean distance: }
+The Euclidean distance heuristic is often used when the problem allows the movement in any direction or angle. The mathematical representation of the Euclidean distance function is \begin{math}D * \sqrt{\delta x^2 + \delta y^2}\end{math}. However, if this is the case, then one may have trouble with using A* directly because the cost function g will not match the heuristic function h. Since Euclidean distance is shorter than Manhattan or diagonal distance, one will still get shortest paths, but A* will take longer to run.
+
+\newpage
+\subsection{Approximate heuristics}
+A heuristic that has the exact distance is ideal for making A* fast but it’s usually impractical. We can often process the graph before hand to construct an approximate distance, and use that approximation in the A* heuristic. One approach to use one of the exact heuristics idea and try to make the your approximate heuristic function close to it.
+
+\subsubsection{ALT A*}
+The ALT A* is one of the most remarkable A* approximation heuristics. It was developed by Andrew Goldberg and Chris Harrelson. The heuristic is preprocessing the graph using a linear amount of extra space to store auxiliary information, and using this information to answer shortest path queries quickly. The approach uses A* search in combination with a new graph-theoretic lower-bounding technique based on landmarks and the triangle inequality. The algorithm then develops new bidirectional variants of A* search and investigate several variants of the new algorithms to find those that are most efficient in practice. Our algorithms compute optimal shortest paths and work on any directed graph. Their approach is A* search with Euclidean bounds, by a wide margin on road networks.
 
 
+
+\poi
 \printbibliography
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%

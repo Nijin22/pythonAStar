@@ -70,9 +70,21 @@
 \author{Saleh Shehata \& Dennis Weber}
 \maketitle
 
-
+\begin{abstract}
+	A* is a well-known and often used algorithm for pathfinding.
+	It can be used in a lot of use-cases which require navigation between two points on a graph.
+	First published in 1968 by Hart, Nilsson and Raphael\cite{hartNilssonRaphael} it improves upon Dijkstra's algorithm\cite{Dijkstra1959} by adding a heuristic expectation, which leads to performance improvements.
+	
+	We chose to research A* in this project, as it has a lot of applications and is used in a other project by Saleh Shehata.
+	
+	In this paper, we present a implementation of A* in the programming language python, provide detailed explanations how it works and look into the possible different heuristic functions.
+\end{abstract}
 
 \newpage
+
+\section{Background Information}
+A* was first published in 1968 by Hart, Nilsson and Raphael\cite{hartNilssonRaphael}. It is based on Dijkstra's algorithm\cite{Dijkstra1959} and adds a heuristic function to the selection of the next node to inspect.
+
 
 \section{Description of A*}
 A* is a extension to Dijkstra's pathfinding algorithm\cite{Dijkstra1959}, in that A* adds a \enquote{heuristic} to prefer nodes which are more likely to be those who actually lie on the path to the target node.

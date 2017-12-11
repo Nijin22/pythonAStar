@@ -350,8 +350,8 @@ The Euclidean distance heuristic is often used when the problem allows the movem
 \subsection{Approximate heuristics}
 A heuristic that has the exact distance is ideal for making A* fast but it’s usually impractical. We can often process the graph before hand to construct an approximate distance, and use that approximation in the A* heuristic. One approach to use one of the exact heuristics idea and try to make the your approximate heuristic function close to it.
 
-\subsubsection{ALT A* \cite{By Andrew Goldberg and Chris Harrelson}}
-The ALT A* is one of the most remarkable A* approximation heuristics. The heuristic is preprocessing the graph using a linear amount of extra space to store auxiliary information, and using this information to answer shortest path queries quickly. The approach uses A* search in combination with a new graph-theoretic lower-bounding technique based on landmarks and the triangle inequality. The algorithm then develops new bidirectional variants of A* search and investigate several variants of the new algorithms to find those that are most efficient in practice. Our algorithms compute optimal shortest paths and work on any directed graph. Their approach is A* search with Euclidean bounds, by a wide margin on road networks.
+\subsubsection{ALT A*}
+The ALT A* is one of the most remarkable A* approximation heuristics. It was developed by Andrew Goldberg and Chris Harrelson\cite{goldberg2005computing}. The heuristic is preprocessing the graph using a linear amount of extra space to store auxiliary information, and using this information to answer shortest path queries quickly. The approach uses A* search in combination with a new graph-theoretic lower-bounding technique based on landmarks and the triangle inequality. The algorithm then develops new bidirectional variants of A* search and investigate several variants of the new algorithms to find those that are most efficient in practice. Our algorithms compute optimal shortest paths and work on any directed graph. Their approach is A* search with Euclidean bounds, by a wide margin on road networks.
 
 \printbibliography
 

@@ -324,7 +324,6 @@ So if the lower h(v) is the slower A* is; however the slowest it can get, is as 
 
 So is it always true that the higher the heuristic function is, the faster A* algorithm behaves? Of course yes but it is not always guaranteed to find the shortest path. If h(n) is sometimes greater than the cost of moving from n to the goal, then A* is not guaranteed to find a shortest path, but it can run faster.
 
-\newpage
 \subsection{Exact Heuristics}
 Exact Heuristic function is the perfect heuristic function, one can have. If the heuristic function is exactly equal to the distance along the optimal path, A* will expand very few nodes. A* will compute:  f(n) = g(n) + h(n) at every node. When h(n) exactly matches g(n), the value of f(n) won't change along the path. All nodes not on the right path will have a higher value of f than nodes that are on the right path. Since A* won't consider higher-valued f nodes until it has considered lower-valued f nodes, it will never stray off the shortest path.
 
@@ -346,7 +345,6 @@ The Diagonal distance heuristic is often used when the problem restricts that to
 \paragraph{Euclidean distance: }
 The Euclidean distance heuristic is often used when the problem allows the movement in any direction or angle. The mathematical representation of the Euclidean distance function is \begin{math}D * \sqrt{\delta x^2 + \delta y^2}\end{math}. However, if this is the case, then one may have trouble with using A* directly because the cost function g will not match the heuristic function h. Since Euclidean distance is shorter than Manhattan or diagonal distance, one will still get shortest paths, but A* will take longer to run.
 
-\newpage
 \subsection{Approximate heuristics}
 A heuristic that has the exact distance is ideal for making A* fast but it’s usually impractical. We can often process the graph before hand to construct an approximate distance, and use that approximation in the A* heuristic. One approach to use one of the exact heuristics idea and try to make the your approximate heuristic function close to it.
 
